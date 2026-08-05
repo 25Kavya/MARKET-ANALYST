@@ -1,0 +1,12 @@
+.env
+dump.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+phase7/data/portfolio.json
+data/*.db
+data/*.db-wal
+data/*.db-shm
+*.out.log
