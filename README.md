@@ -67,14 +67,3 @@ judgment on ambiguous phrasing.
 pytest                                   # 131 passed, 1 skipped
 RUN_LIVE_LLM_TESTS=1 pytest phase6/tests/test_intent.py -m live_llm  # real Groq call
 ```
-
-## Project status
-
-All 9 build phases are complete and tested (131/131 automated checks
-passing). `PHASES.md` currently documents Phases 1–8 as final; Phase 9
-(MCP-backed Groq intent classification) landed after that and isn't yet
-reflected there — see `phase9/TEST_RESULTS.md` for its verification.
-
-**Known gaps:**
-- No process supervisor for `phase9/mcp_server.py` — must be started manually.
-- No CI pipeline yet.
