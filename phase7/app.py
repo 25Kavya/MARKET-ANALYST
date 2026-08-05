@@ -1,9 +1,17 @@
+import os
+
 import streamlit as st
 
 from phase7.api_client import ApiClient, ApiError
+from phase7.backend_bootstrap import ensure_backend_running
 from phase7.portfolio_store import add_holding, load_portfolio, remove_holding
 
 st.set_page_config(page_title="Market Analyst", page_icon="📈", layout="wide")
+
+if os.getenv("MARKET_ANALYST_SELF_HOST_BACKEND", "").lower() in ("1", "true", "yes"):
+    if not ensure_backend_running():
+        st.error("Backend failed to start — check the app logs.")
+        st.stop()
 
 
 def get_client():

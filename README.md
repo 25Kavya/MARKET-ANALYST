@@ -70,8 +70,25 @@ RUN_LIVE_LLM_TESTS=1 pytest phase6/tests/test_intent.py -m live_llm  # real Groq
 
 ## Deploying
 
-The backend (FastAPI + MCP server, bundled together via `start.sh`) and the
-UI are deployed as two separate free services:
+### Option A — Streamlit Community Cloud only (fully free, no card, one service)
+
+`phase7/backend_bootstrap.py` can self-host the FastAPI backend and MCP
+server as subprocesses inside the same Streamlit container, so this is the
+only account you need.
+
+1. Go to [share.streamlit.io](https://share.streamlit.io) → sign in with
+   GitHub → **New app** → this repo → main file path `phase7/app.py`.
+2. Advanced settings → Secrets:
+   ```
+   MARKET_ANALYST_SELF_HOST_BACKEND = "1"
+   GROQ_API_KEY = "your-groq-key"
+   ```
+3. Deploy. You get a public `*.streamlit.app` URL.
+
+### Option B — Render (backend) + Streamlit Community Cloud (UI), two services
+
+Use this if you'd rather keep the backend as its own service (e.g. to hit
+its API directly, not just through the UI).
 
 **1. Backend → [Render](https://dashboard.render.com)**
 - New → Blueprint → connect this GitHub repo (Render reads `render.yaml`).
@@ -89,6 +106,7 @@ UI are deployed as two separate free services:
   (the URL copied from step 1).
 - Deploy. The app is now live at a `*.streamlit.app` URL.
 
-Note: Render's free tier sleeps after inactivity and its filesystem is
-ephemeral, so the SQLite intent-cache and any saved portfolio reset on
-restart/redeploy — expected for a demo deployment, not a data-loss bug.
+Note: both options run on free tiers that sleep after inactivity and have an
+ephemeral filesystem, so the SQLite intent-cache and any saved portfolio
+reset on restart/redeploy — expected for a demo deployment, not a data-loss
+bug.
