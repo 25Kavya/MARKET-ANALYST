@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: market-analyst-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash start.sh
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: llama-3.1-8b-instant
+      - key: MCP_SERVER_PORT
+        value: "8100"
+      - key: LOG_LEVEL
+        value: INFO

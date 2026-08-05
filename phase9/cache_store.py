@@ -43,6 +43,7 @@ def _ensure_schema(conn):
 
 
 def _connect():
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     # isolation_level=None (autocommit) so each statement commits immediately
     # instead of leaving an implicit transaction open, minimizing how long a
     # write lock is held under concurrent access.

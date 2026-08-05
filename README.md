@@ -67,3 +67,28 @@ judgment on ambiguous phrasing.
 pytest                                   # 131 passed, 1 skipped
 RUN_LIVE_LLM_TESTS=1 pytest phase6/tests/test_intent.py -m live_llm  # real Groq call
 ```
+
+## Deploying
+
+The backend (FastAPI + MCP server, bundled together via `start.sh`) and the
+UI are deployed as two separate free services:
+
+**1. Backend → [Render](https://dashboard.render.com)**
+- New → Blueprint → connect this GitHub repo (Render reads `render.yaml`).
+- When prompted for `GROQ_API_KEY`, paste your key — it's stored as a Render
+  secret, never committed to the repo.
+- Deploy, then copy the resulting public URL
+  (`https://market-analyst-backend-xxxx.onrender.com`).
+
+**2. UI → [Streamlit Community Cloud](https://share.streamlit.io)**
+- New app → this repo → main file path `phase7/app.py`.
+- In Advanced settings → Secrets, add:
+  ```
+  MARKET_ANALYST_API_URL = "https://market-analyst-backend-xxxx.onrender.com"
+  ```
+  (the URL copied from step 1).
+- Deploy. The app is now live at a `*.streamlit.app` URL.
+
+Note: Render's free tier sleeps after inactivity and its filesystem is
+ephemeral, so the SQLite intent-cache and any saved portfolio reset on
+restart/redeploy — expected for a demo deployment, not a data-loss bug.
