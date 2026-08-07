@@ -3,15 +3,7 @@
 A multi-agent AI stock research system for Indian equities (NSE). Ask a
 plain-English question — about one stock, your whole portfolio, or a
 head-to-head comparison — and three specialist agents (technical, sentiment,
-financial) analyze it in parallel and combine their opinions into one answer.
-
-## What it does
-
-Handles three kinds of queries, routed automatically from plain English:
-
-- **Single stock** — "how is infosys doing"
-- **Portfolio** — "how is my portfolio doing"
-- **Compare** — "compare mahindra and reliance"
+financial) analyze it in parallel and combine their opinions into one answer
 
 ## Architecture
 
