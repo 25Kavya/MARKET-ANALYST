@@ -1,7 +1,7 @@
 # Market Analyst
 
 A multi-agent AI stock research system for Indian equities (NSE). Ask a
-plain-English question — about one stock, your whole portfolio, or a
+ question — about one stock, your whole portfolio, or a
 head-to-head comparison — and three specialist agents (technical, sentiment,
 financial) analyze it in parallel and combine their opinions into one answer
 
